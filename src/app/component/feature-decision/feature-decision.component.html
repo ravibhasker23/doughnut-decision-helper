@@ -1,116 +1,232 @@
 <div class="row ms-5">
-  <div class="col-lg-12">
-    <div class="col-lg-12 mx-auto py-md-1 ms-5">
-        <small>Please proceed below with answering the below questions in the story. Feel free to hit 'Refresh' the story when you<br>
-        don't like it. At the end of the questionnaire, you can generate the decisions you made in the story by clicking on 'Generate Tree' </small>
+  <div
+    class="col-xs-12 col-sm-12 col-md-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xl-12"
+  >
+    <div
+      class="col-xs-12 col-sm-12 col-md-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xl-12 mx-auto py-md-1 ms-5"
+    >
+      <small
+        >Please proceed below with answering the below questions in the story.
+        Feel free to hit 'Refresh' the story when you<br />
+        don't like it. At the end of the questionnaire, you can generate the
+        decisions you made in the story by clicking on 'Generate Tree'
+      </small>
     </div>
 
     <div class="row">
-      <div class="col-lg-12 mx-auto py-md-1 ms-5">
-        <button type="button" class="btn btn-success btn-sm"
-        [disabled]="answerGroup.length < 1"
-        (click)="resetState()">
-        Refresh <i class="bi bi-arrow-clockwise"></i></button>
+      <div
+        class="col-xs-12 col-sm-12 col-md-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xl-12 mx-auto py-md-1 ms-5"
+      >
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          [disabled]="answerGroup.length < 1"
+          (click)="resetState()"
+        >
+          Refresh <i class="bi bi-arrow-clockwise"></i>
+        </button>
       </div>
     </div>
 
     <div class="mx-auto p-4 py-md-1 ms-5">
-        @if( pages ){
-            <div class="row p-4 py-md-4">
-                <div class="col-lg-12">
-                    {{ pages.controls.label }}    
-                </div>
+      @if (pages) {
+        <div class="row p-4 py-md-4">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            {{ pages.controls.label }}
+          </div>
+        </div>
+        <div class="row p-4 py-md-1">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            @if (pages.controls.parent) {
+              <div
+                class="btn-group"
+                role="group"
+                aria-label="Basic radio toggle button group"
+              >
+                @for (
+                  option of pages.controls.options;
+                  track option.label;
+                  let a = $index
+                ) {
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="btnradio"
+                    id="btnradio{{ a }}"
+                    autocomplete="off"
+                    [disabled]="
+                      answerGroup.length >= 2 ||
+                      (answerGroup[0] && answerGroup[0].answers === 'No')
+                    "
+                    (click)="
+                      updateAnswer(
+                        option.controls,
+                        option.label,
+                        pages.controls.qId
+                      )
+                    "
+                  />
+                  <label
+                    class="btn btn-outline-primary"
+                    for="btnradio{{ a }}"
+                    >{{ option.label }}</label
+                  >
+                }
+              </div>
+            }
+          </div>
+        </div>
+      }
+
+      @if (answerGroup.length > 0) {
+        @for (ans of answerGroup; track ans.answerId) {
+          <div class="row row p-4 py-md-4">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              {{ ans.controls.label }}
             </div>
-            <div class="row p-4 py-md-1">
-              <div class="col-lg-12">
-                @if(pages.controls.parent){
-                  <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                      @for( option of pages.controls.options; track option.label; let a = $index){
-                        
-                          <input type="radio" class="btn-check" name="btnradio" id="btnradio{{a}}" autocomplete="off"
-                          [disabled]="answerGroup.length >= 2 || (answerGroup[0] && answerGroup[0].answers === 'No')"
-                          (click)="updateAnswer(option.controls, option.label, pages.controls.qId)">
-                          <label class="btn btn-outline-primary" for="btnradio{{a}}">{{ option.label }}</label>
-                      }
-                  </div>
-              }
+          </div>
+          <div class="row p-4 py-md-1">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <div
+                class="btn-group"
+                role="group"
+                aria-label="Basic radio toggle button group"
+              >
+                @for (
+                  option of ans.controls.options;
+                  track option.controls;
+                  let b = $index
+                ) {
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="btn{{ ans.controls.qId }}"
+                    id="{{ ans.controls.qId + b }}"
+                    autocomplete="off"
+                    (click)="
+                      updateAnswer(
+                        option.controls,
+                        option.label,
+                        ans.controls.qId
+                      )
+                    "
+                    [disabled]="answerGroup.length >= 3"
+                  />
+                  <label
+                    class="btn btn-outline-primary"
+                    for="{{ ans.controls.qId + b }}"
+                    >{{ option.label }}</label
+                  >
+                }
               </div>
             </div>
+          </div>
         }
-        
-
-        @if ( answerGroup.length > 0 ){
-            @for( ans of answerGroup; track ans.answerId ){
-              <div class="row row p-4 py-md-4">
-                <div class="col-lg-12">
-                    {{ ans.controls.label }}
-                  </div>
-                </div>
-                <div class="row p-4 py-md-1">
-                  <div class="col-lg-12">
-                  <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                  @for( option of ans.controls.options; track option.controls; let b = $index){
-                      <input type="radio" class="btn-check" name="btn{{ans.controls.qId}}" id="{{ans.controls.qId + b}}" autocomplete="off" 
-                      (click)="updateAnswer(option.controls, option.label, ans.controls.qId )"
-                      [disabled]="answerGroup.length >= 3">
-                      <label class="btn btn-outline-primary" for="{{ans.controls.qId + b}}">{{ option.label }}</label>
-                  }
-                  </div>
-                  </div>
-                </div>
-            }
-          }
+      }
     </div>
 
-    @if((answerGroup[0] && answerGroup[0].answers === 'No') || (answerGroup.length ===3) ){
-    <div class="row">
-      <div class="col-lg-12 mx-auto py-md-1 ms-5">
-        <button type="button" class="btn btn-success btn-sm"
-        (click)="generateTree()">
-        Generate decision tree <i class="bi bi-signpost-split"></i></button>
+    @if (
+      (answerGroup[0] && answerGroup[0].answers === "No") ||
+      answerGroup.length === 3
+    ) {
+      <div class="row">
+        <div
+          class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mx-auto py-md-1 ms-5"
+        >
+          <button
+            type="button"
+            class="btn btn-success btn-sm"
+            (click)="generateTree()"
+          >
+            Generate Choices made <i class="bi bi-signpost-split"></i>
+          </button>
+        </div>
+
+        <div
+          class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mx-auto py-md-1 ms-5"
+        >
+          <small
+            >Highlighted red boxes shows the choices you've made in your story.
+          </small>
+        </div>
       </div>
-
-      <div class="col-lg-12 mx-auto py-md-1 ms-5">
-        <small>Highlighted red boxes shows the choices you've made in your story. </small>
-    </div>
-    </div>
     }
   </div>
 </div>
 
-@if( pages && showTree){
-<div class="row tree-row">
-  <div class="col-lg-12">
-    <div class="tree">
-      <ul>
+@if (pages && showTree) {
+  <div class="row tree-row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      <div class="tree">
+        <ul>
           <li>
-            <a href="#" [ngClass]="highlight ? 'border' : ''">{{ pages.controls.label }}</a>
-              <ul>
-                @for( option of pages.controls.options; track option.label; let a = $index){
-                  <li>
-                    <a href="#" [ngClass]="control[option.label + pages.controls.qId] ? 'border' : ''">{{ option.controls.label}}</a>
-                    <ul>
-                      @for( subOption of option.controls.options; track subOption.label ){
-                        <li id="{{ subOption.label + subOption.controls.qId}}">
-                          <a href="#"
-                          [ngClass]="control[subOption.label + subOption.controls.qId]  ? 'border' : ''">{{ subOption.controls.label}}</a>
-                          <ul>
-                            @for( subChildOption of subOption.controls.options; track subChildOption.label ){
-                              <li id="{{ subChildOption.label + subChildOption.controls.qId}}">
-                                <a href="#"
-                                [ngClass]="control[subChildOption.label + subChildOption.controls.qId]  ? 'border' : ''"
-                                >{{ subChildOption.controls.label}}</a>
-                            }
-                          </ul>
-                      }
-                    </ul>
-                  </li>
-                }
-              </ul>
-  
+            <a href="#" [ngClass]="highlight ? 'border' : ''">{{
+              pages.controls.label
+            }}</a>
+            <ul>
+              @for (
+                option of pages.controls.options;
+                track option.label;
+                let a = $index
+              ) {
+                <li>
+                  <a
+                    href="#"
+                    [ngClass]="
+                      control[option.label + pages.controls.qId] ? 'border' : ''
+                    "
+                    >{{ option.controls.label }}</a
+                  >
+                  <ul>
+                    @for (
+                      subOption of option.controls.options;
+                      track subOption.label
+                    ) {
+                      <li id="{{ subOption.label + subOption.controls.qId }}">
+                        <a
+                          href="#"
+                          [ngClass]="
+                            control[subOption.label + subOption.controls.qId]
+                              ? 'border'
+                              : ''
+                          "
+                          >{{ subOption.controls.label }}</a
+                        >
+                        <ul>
+                          @for (
+                            subChildOption of subOption.controls.options;
+                            track subChildOption.label
+                          ) {
+                            <li
+                              id="{{
+                                subChildOption.label +
+                                  subChildOption.controls.qId
+                              }}"
+                            >
+                              <a
+                                href="#"
+                                [ngClass]="
+                                  control[
+                                    subChildOption.label +
+                                      subChildOption.controls.qId
+                                  ]
+                                    ? 'border'
+                                    : ''
+                                "
+                                >{{ subChildOption.controls.label }}</a
+                              >
+                            </li>
+                          }
+                        </ul>
+                      </li>
+                    }
+                  </ul>
+                </li>
+              }
+            </ul>
           </li>
         </ul>
       </div>
+    </div>
   </div>
-</div>
 }

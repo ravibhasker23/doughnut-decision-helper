@@ -13,10 +13,7 @@ import { QuestionnaireEffect, questionnaireReducer } from '../store';
 import { FeatureDecisionComponent } from './component/feature-decision/feature-decision.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FeatureDecisionComponent
-  ],
+  declarations: [AppComponent, FeatureDecisionComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -25,12 +22,12 @@ import { FeatureDecisionComponent } from './component/feature-decision/feature-d
     EffectsModule.forRoot([QuestionnaireEffect]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
-      logOnly: true
+      logOnly: true,
     }),
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [QuestionnaireService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

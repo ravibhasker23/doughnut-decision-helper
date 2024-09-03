@@ -11,55 +11,53 @@ describe('FeatureDecisionComponent', () => {
   let mockStore: MockStore;
 
   const questionnaire: IPage = {
-      controls: {
-        qId: '1',
-        parent: true,
-        label: 'Do I want a doughnut?',
-        options: [
-          {
-            label: 'Yes',
-            value: 'Yes',
-            controls: {
-              qId: '1.1',
-              parent: true,
-              label: 'Do I deserve it?',
-              options: [
-                {
-                  label: 'Yes',
-                  value: 'Yes',
-                  controls: {
-                    qId: '1.1.1',
-                    parent: true,
-                    label: 'Are you sure?',
-                    options: [
-                    ]
-                  }
+    controls: {
+      qId: '1',
+      parent: true,
+      label: 'Do I want a doughnut?',
+      options: [
+        {
+          label: 'Yes',
+          value: 'Yes',
+          controls: {
+            qId: '1.1',
+            parent: true,
+            label: 'Do I deserve it?',
+            options: [
+              {
+                label: 'Yes',
+                value: 'Yes',
+                controls: {
+                  qId: '1.1.1',
+                  parent: true,
+                  label: 'Are you sure?',
+                  options: [],
                 },
-              ]
-            }
+              },
+            ],
           },
-          {
-            label: 'No',
-            value: 'No',
-            controls: {
-              qId: '1.2',
-              parent: false,
-              label: 'Maybe you want an apple?',
-              options: []
-            }
-          }
-        ]
-      }
-  }
-  
+        },
+        {
+          label: 'No',
+          value: 'No',
+          controls: {
+            qId: '1.2',
+            parent: false,
+            label: 'Maybe you want an apple?',
+            options: [],
+          },
+        },
+      ],
+    },
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [FeatureDecisionComponent],
-      schemas:[CUSTOM_ELEMENTS_SCHEMA],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [provideMockStore({})],
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(FeatureDecisionComponent);
     component = fixture.componentInstance;
     mockStore = TestBed.inject(MockStore);
@@ -72,7 +70,7 @@ describe('FeatureDecisionComponent', () => {
   });
 
   it('should call ngOnInit', () => {
-    component.ngOnInit()
+    component.ngOnInit();
 
     expect(component.answerGroup).toEqual([]);
   });
@@ -83,24 +81,22 @@ describe('FeatureDecisionComponent', () => {
       label: 'Maybe you want an apple?',
       options: [],
       parent: false,
-      qId: '1.2'
-    }
+      qId: '1.2',
+    };
     const id = '1';
-    const event = 'Yes'
+    const event = 'Yes';
 
-    component.updateAnswer(options, event, id)
+    component.updateAnswer(options, event, id);
 
     expect(component.answers.controls.label).toEqual('');
     expect(component.answers.answerId).toEqual('');
     expect(component.answers.answers).toEqual('');
     expect(component.tempAns.length).toEqual(1);
     expect(component.answerGroup.length).toEqual(1);
-
   });
 
-  
   it('should call reset for resetting the answer state', () => {
-    component.reset()
+    component.reset();
 
     expect(component.answers.controls.label).toEqual('');
     expect(component.answers.answerId).toEqual('');
@@ -110,7 +106,7 @@ describe('FeatureDecisionComponent', () => {
   it('should call resetState resetting to original state', () => {
     const dispatchSpy = spyOn(mockStore, 'dispatch').and.callThrough();
 
-    component.resetState()
+    component.resetState();
 
     expect(component.answerGroup).toEqual([]);
     expect(component.tempAns).toEqual([]);
@@ -121,22 +117,22 @@ describe('FeatureDecisionComponent', () => {
   });
 
   it('should call generateTree for generating decision tree', () => {
-    component.answerGroup = [{
-      answerId: "1",
-      answers: "No",
-      controls: {
-        label: "Maybe you want an apple?",
-        options: [],
-        parent: false,
-        qId: "1.2"
-      }
-    }
-]
-    component.generateTree()
+    component.answerGroup = [
+      {
+        answerId: '1',
+        answers: 'No',
+        controls: {
+          label: 'Maybe you want an apple?',
+          options: [],
+          parent: false,
+          qId: '1.2',
+        },
+      },
+    ];
+    component.generateTree();
 
     expect(component.showTree).toEqual(true);
     expect(component.highlight).toEqual(true);
     expect(component.control).toBeDefined();
-
   });
 });

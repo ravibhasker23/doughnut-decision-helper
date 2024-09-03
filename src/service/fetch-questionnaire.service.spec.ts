@@ -1,32 +1,27 @@
 import { TestBed } from '@angular/core/testing';
-
 import { QuestionnaireService } from './fetch-questionnaire.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { IQuestionResponse } from '../store/questionnaire-state.model';
 
 describe('QuestionnaireService', () => {
   let service: QuestionnaireService;
 
-
-  let httpClient: HttpClient;
-
-  const path = 'http://localhost:3000/api/questionnaire';
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      providers: [QuestionnaireService]
+      providers: [QuestionnaireService],
     });
-    service = TestBed.inject(QuestionnaireService);
+    service = TestBed.get(QuestionnaireService);
   });
 
   it('should be created', () => {
+    const service: QuestionnaireService = TestBed.get(QuestionnaireService);
     expect(service).toBeTruthy();
   });
-  
-  it('should call fetchQuestionnaire ', () => {
-    expect(service.fetchQuestionnaire().subscribe(() =>{
-      expect(httpClient.get).toEqual(path)
-      })
-    );
+
+  it('be able to retrieve posts from the API bia GET', () => {
+    service.fetchQuestionnaire().subscribe((res) => {
+      expect(res).toBeDefined();
+    });
   });
 });

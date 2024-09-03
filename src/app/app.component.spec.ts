@@ -11,7 +11,7 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AppComponent],
-      schemas:[CUSTOM_ELEMENTS_SCHEMA],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [provideMockStore({})],
     }).compileComponents();
 
@@ -34,7 +34,9 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Doughnut Manager.');
+    expect(compiled.querySelector('h1')?.textContent).toContain(
+      'Doughnut Manager.',
+    );
   });
 
   it('should call ngOnInit upon initialization', () => {
@@ -45,7 +47,5 @@ describe('AppComponent', () => {
     app.ngOnInit();
 
     expect(dispatchSpy).toHaveBeenCalledWith(new FetchInitialQuestionnaire());
-
   });
-
 });

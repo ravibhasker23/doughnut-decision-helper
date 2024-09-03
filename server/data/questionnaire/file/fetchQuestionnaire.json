@@ -1,108 +1,95 @@
 {
-    "doughnutCategory": "1abc-22234-2usa-11234",
-    "page":
-      {
-        "controls": {
-            "qId": "1",
+  "doughnutCategory": "1abc-22234-2usa-11234",
+  "page": {
+    "controls": {
+      "qId": "1",
+      "parent": true,
+      "label": "Do I want a doughnut?",
+      "options": [
+        {
+          "label": "Yes",
+          "value": "Yes",
+          "controls": {
+            "qId": "1.1",
             "parent": true,
-            "label": "Do I want a doughnut?",
+            "label": "Do I deserve it?",
             "options": [
               {
                 "label": "Yes",
                 "value": "Yes",
                 "controls": {
-                    "qId": "1.1",
-                    "parent": true,
-                    "label": "Do I deserve it?",
-                    "options": [
-                      {
-                        "label": "Yes",
-                        "value": "Yes",
-                        "controls": {
-                            "qId": "1.1.1",
-                            "parent": true,
-                            "label": "Are you sure?",
-                            "options": [
-                              {
-                                "label": "Yes",
-                                "value": "Yes",
-                                "controls": {
-                                    "qId": "1.1.1.1",
-                                    "parent": false,
-                                    "label": "Get it.",
-                                    "options": [
-                                      
-                                    ]
-                                  }
-                              },
-                              {
-                                "label": "No",
-                                "value": "No",
-                                "controls": {
-                                    "qId": "1.1.1.2",
-                                    "parent": false,
-                                    "label": "Do jumping jacks first.",
-                                    "options": [
-                                      
-                                    ]
-                                  }
-                              }
-                            ]
-                          }
-                      },
-                      {
-                        "label": "No",
-                        "value": "No",
-                        "controls": {
-                            "qId": "1.1.2",
-                            "parent": true,
-                            "label": "Is it a good doughnut?",
-                            "options": [
-                              {
-                                "label": "Yes",
-                                "value": "Yes",
-                                "controls":
-                                  {
-                                    "qId": "1.1.2.1",
-                                    "parent": false,
-                                    "label": "What are you waiting for? Grab it now.",
-                                    "options": [
-                                      
-                                    ]
-                                  }
-                              },
-                              {
-                                "label": "No",
-                                "value": "No",
-                                "controls": 
-                                  {
-                                    "qId": "1.1.2.2",
-                                    "parent": false,
-                                    "label": "Wait 'till you find a sinful, unforgettable doughnut.",
-                                    "options": [
-                                      
-                                    ]
-                                  }
-                              }
-                            ]
-                          }
+                  "qId": "1.1.1",
+                  "parent": true,
+                  "label": "Are you sure?",
+                  "options": [
+                    {
+                      "label": "Yes",
+                      "value": "Yes",
+                      "controls": {
+                        "qId": "1.1.1.1",
+                        "parent": false,
+                        "label": "Get it.",
+                        "options": []
                       }
-                    ]
-                  }
+                    },
+                    {
+                      "label": "No",
+                      "value": "No",
+                      "controls": {
+                        "qId": "1.1.1.2",
+                        "parent": false,
+                        "label": "Do jumping jacks first.",
+                        "options": []
+                      }
+                    }
+                  ]
+                }
               },
               {
                 "label": "No",
                 "value": "No",
                 "controls": {
-                    "qId": "1.2",
-                    "parent": false,
-                    "label": "Maybe you want an apple?",
-                    "options": [
-                      
-                    ]
-                  }
+                  "qId": "1.1.2",
+                  "parent": true,
+                  "label": "Is it a good doughnut?",
+                  "options": [
+                    {
+                      "label": "Yes",
+                      "value": "Yes",
+                      "controls": {
+                        "qId": "1.1.2.1",
+                        "parent": false,
+                        "label": "What are you waiting for? Grab it now.",
+                        "options": []
+                      }
+                    },
+                    {
+                      "label": "No",
+                      "value": "No",
+                      "controls": {
+                        "qId": "1.1.2.2",
+                        "parent": false,
+                        "label": "Wait 'till you find a sinful, unforgettable doughnut.",
+                        "options": []
+                      }
+                    }
+                  ]
+                }
               }
             ]
           }
-      }
+        },
+        {
+          "label": "No",
+          "value": "No",
+          "controls": {
+            "qId": "1.2",
+            "parent": false,
+            "label": "Maybe you want an apple?",
+            "options": []
+          }
+        }
+      ]
+    }
   }
+}
