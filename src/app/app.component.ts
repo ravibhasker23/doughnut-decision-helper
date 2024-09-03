@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { IQuestionResponse, IQuestionnaireState } from '../store/questionnaire-state.model';
+import { IQuestionResponse } from '../store/questionnaire-state.model';
 import { FetchInitialQuestionnaire, pageSelector } from '../store';
 
 @Component({
@@ -10,7 +9,7 @@ import { FetchInitialQuestionnaire, pageSelector } from '../store';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'doughnut-app';
+  title = 'doughnut-manager';
 
   page$ = this.store.select(pageSelector);
   
@@ -18,11 +17,7 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
-    //Dispatch the action for fetching the posts
+    //Dispatch the action for fetching the questionnaire
     this.store.dispatch(new FetchInitialQuestionnaire());
-
-    this.page$.subscribe(res =>{
-      console.log(res);
-    })
   }
 }

@@ -1,12 +1,21 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { provideMockStore } from '@ngrx/store/testing';
+import { MockStore } from '@ngrx/store/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FetchInitialQuestionnaire } from '../store/questionnaire.actions';
 
 describe('AppComponent', () => {
+  let mockStore: MockStore;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
-      
+      declarations: [AppComponent],
+      schemas:[CUSTOM_ELEMENTS_SCHEMA],
+      providers: [provideMockStore({})],
     }).compileComponents();
+
+    mockStore = TestBed.inject(MockStore);
   });
 
   it('should create the app', () => {
@@ -15,16 +24,28 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'doughnut-app' title`, () => {
+  it(`should have the 'doughnut-manager' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('doughnut-app');
+    expect(app.title).toEqual('doughnut-manager');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, doughnut-app');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Doughnut Manager.');
   });
+
+  it('should call ngOnInit upon initialization', () => {
+    const dispatchSpy = spyOn(mockStore, 'dispatch').and.callThrough();
+
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    app.ngOnInit();
+
+    expect(dispatchSpy).toHaveBeenCalledWith(new FetchInitialQuestionnaire());
+
+  });
+
 });

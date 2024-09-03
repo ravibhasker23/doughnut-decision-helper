@@ -9,7 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { QuestionnaireService } from '../service/fetch-questionnaire.service';
-import { QuestionnaireEpic, questionnaireReducer } from '../store';
+import { QuestionnaireEffect, questionnaireReducer } from '../store';
 import { FeatureDecisionComponent } from './component/feature-decision/feature-decision.component';
 
 @NgModule({
@@ -22,7 +22,7 @@ import { FeatureDecisionComponent } from './component/feature-decision/feature-d
     AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot({ questionnaire: questionnaireReducer }),
-    EffectsModule.forRoot([QuestionnaireEpic]),
+    EffectsModule.forRoot([QuestionnaireEffect]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: true

@@ -9,14 +9,14 @@ import { IPage, IQuestionResponse } from './questionnaire-state.model';
 
 
 @Injectable()
-export class QuestionnaireEpic {
+export class QuestionnaireEffect {
 
 constructor(
     private actions$: Actions<Action>,
     private _fetchQuestionnaire: QuestionnaireService
     ) {}
 
-  public fetchInitPosts$ = createEffect(() => {
+  public fetchInitQuestionnaire$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ActionTypes.FETCH_INIT_QUESTIONNAIRE),
       mergeMap(() => {

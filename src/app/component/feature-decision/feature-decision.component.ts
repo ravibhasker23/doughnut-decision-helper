@@ -33,8 +33,6 @@ export class FeatureDecisionComponent implements OnInit{
 
   resetFlag = false;
 
-  disabledIndex!: string;
-
   showTree = false;
 
   highlight = false;
@@ -45,13 +43,11 @@ export class FeatureDecisionComponent implements OnInit{
   ){}
   
 
-  ngOnInit(){
-    console.log(this.pages);
+  ngOnInit(): void{
     this.answerGroup = [];
   }
 
   updateAnswer(option: IControl, event: string, id: string){
-    this.disabledIndex = id;
     this.tempAns.forEach((element, index) => {
       if(element.answerId === id){
         this.tempAns.splice(index, 1);
@@ -67,7 +63,6 @@ export class FeatureDecisionComponent implements OnInit{
     this.answerGroup = [];
     this.answerGroup = [...this.tempAns];
     this.reset();
-    console.log(this.tempAns);
   }
 
   reset(){

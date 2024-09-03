@@ -23,7 +23,6 @@ export function questionnaireReducer(
             }
         }
         case ActionTypes.FETCH_INIT_QUESTIONNAIRE_SUCCESS: {
-            console.log('here')
             state = initState;
             return {
                 ...state,
