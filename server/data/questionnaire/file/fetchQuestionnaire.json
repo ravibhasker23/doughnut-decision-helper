@@ -4,15 +4,15 @@
     "controls": {
       "qId": "1",
       "parent": true,
-      "label": "Do I want a doughnut?",
+      "label": "Do you want a doughnut?",
       "options": [
         {
-          "label": "Yes",
+          "label": "Yes, Duh",
           "value": "Yes",
           "controls": {
             "qId": "1.1",
             "parent": true,
-            "label": "Do I deserve it?",
+            "label": "Do you deserve it?",
             "options": [
               {
                 "label": "Yes",
@@ -23,22 +23,22 @@
                   "label": "Are you sure?",
                   "options": [
                     {
-                      "label": "Yes",
+                      "label": "Certainly",
                       "value": "Yes",
                       "controls": {
                         "qId": "1.1.1.1",
                         "parent": false,
-                        "label": "Get it.",
+                        "label": "Good choice. Enjoy the sweet calories.",
                         "options": []
                       }
                     },
                     {
-                      "label": "No",
+                      "label": "Not really",
                       "value": "No",
                       "controls": {
                         "qId": "1.1.1.2",
                         "parent": false,
-                        "label": "Do jumping jacks first.",
+                        "label": "Okay. doughnuts don't judge; they understand. ",
                         "options": []
                       }
                     }
@@ -46,15 +46,15 @@
                 }
               },
               {
-                "label": "No",
+                "label": "Maybe not",
                 "value": "No",
                 "controls": {
                   "qId": "1.1.2",
                   "parent": true,
-                  "label": "Is it a good doughnut?",
+                  "label": "Is it a delicious doughnut?",
                   "options": [
                     {
-                      "label": "Yes",
+                      "label": "Absolutlely",
                       "value": "Yes",
                       "controls": {
                         "qId": "1.1.2.1",
@@ -64,7 +64,7 @@
                       }
                     },
                     {
-                      "label": "No",
+                      "label": "Not so much",
                       "value": "No",
                       "controls": {
                         "qId": "1.1.2.2",
@@ -80,12 +80,12 @@
           }
         },
         {
-          "label": "No",
+          "label": "Not today",
           "value": "No",
           "controls": {
             "qId": "1.2",
             "parent": false,
-            "label": "Maybe you want an apple?",
+            "label": "Doughnut go breaking my heart.",
             "options": []
           }
         }

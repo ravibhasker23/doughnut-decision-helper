@@ -53,6 +53,7 @@ export class FeatureDecisionComponent implements OnInit {
     this.answerGroup = [];
   }
 
+  //Updating the answersGroup with the user selection and keeping a temp storage for next level reference.
   updateAnswer(option: IControl, event: string, id: string) {
     this.tempAns.forEach((element, index) => {
       if (element.answerId === id) {
@@ -68,10 +69,10 @@ export class FeatureDecisionComponent implements OnInit {
 
     this.answerGroup = [];
     this.answerGroup = [...this.tempAns];
-    console.log(this.answerGroup);
     this.reset();
   }
 
+  //Resetting the answers for keeping the next set of selection.
   reset() {
     this.answers = {
       controls: {
@@ -85,6 +86,7 @@ export class FeatureDecisionComponent implements OnInit {
     };
   }
 
+  // Called when users refresh the current selection and resetting to initial fetch for questionnaire
   resetState() {
     this.answerGroup = [];
     this.tempAns = [];
@@ -93,14 +95,16 @@ export class FeatureDecisionComponent implements OnInit {
     this.control = {};
 
     this.store.dispatch(new FetchInitialQuestionnaire());
+    this.store.dispatch(new SetAnswers([]));
   }
 
+  // Creating the tree structure, adding custom class on runtime based on user selection and keeping the answers in store.
   generateTree() {
     this.control = {};
     this.showTree = true;
     this.highlight = true;
 
-    this.store.dispatch(new SetAnswers(this.tempAns));
+    this.store.dispatch(new SetAnswers(this.answerGroup));
 
     this.answerGroup.forEach((element, index) => {
       this.control[element.answers + element.answerId] = true;

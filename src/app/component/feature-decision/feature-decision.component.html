@@ -6,13 +6,14 @@
       class="col-xs-12 col-sm-12 col-md-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xl-12 mx-auto py-md-1 ms-5"
     >
       <small
-        >Please proceed below with answering the below questions in the story.
-        Feel free to hit 'Refresh' the story when you<br />
-        don't like it. At the end of the questionnaire, you can generate the
-        decisions you made in the story by clicking on 'Generate Tree'
+        >Please make your choices for the below set of questions. Hit
+        <i>'Refresh'</i> if you would like to start over. At the end, you can
+        view your<br />
+        decisions by clicking on <i>'Review your sweet choices'</i>.
       </small>
     </div>
 
+    <!-- Refresh button for resetting state start -->
     <div class="row">
       <div
         class="col-xs-12 col-sm-12 col-md-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xl-12 mx-auto py-md-1 ms-5"
@@ -27,10 +28,13 @@
         </button>
       </div>
     </div>
+    <!-- Refresh button for resetting state end -->
+
+    <!-- Initial question for the begining of the questionnaire start -->
 
     <div class="mx-auto p-4 py-md-1 ms-5">
       @if (pages) {
-        <div class="row p-4 py-md-4">
+        <div class="row p-4 py-md-1">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             {{ pages.controls.label }}
           </div>
@@ -66,10 +70,8 @@
                       )
                     "
                   />
-                  <label
-                    class="btn btn-outline-primary"
-                    for="btnradio{{ a }}"
-                    >{{ option.label }}</label
+                  <label class="btn btn-outline-primary" for="btnradio{{ a }}"
+                    ><i>{{ option.label }}</i></label
                   >
                 }
               </div>
@@ -77,10 +79,13 @@
           </div>
         </div>
       }
+      <!-- Initial question for the begining of the questionnaire end -->
+
+      <!-- Selected answers by the users and follow-up question section start -->
 
       @if (answerGroup.length > 0) {
         @for (ans of answerGroup; track ans.answerId) {
-          <div class="row row p-4 py-md-4">
+          <div class="row row p-4 py-md-1">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
               {{ ans.controls.label }}
             </div>
@@ -115,7 +120,7 @@
                   <label
                     class="btn btn-outline-primary"
                     for="{{ ans.controls.qId + b }}"
-                    >{{ option.label }}</label
+                    ><i>{{ option.label }}</i></label
                   >
                 }
               </div>
@@ -124,9 +129,10 @@
         }
       }
     </div>
+    <!-- Selected answers by the users and follow-up question section end -->
 
     @if (
-      (answerGroup[0] && answerGroup[0].answers === "No") ||
+      (answerGroup[0] && answerGroup[0].answers === "Not today") ||
       answerGroup.length === 3
     ) {
       <div class="row">
@@ -138,7 +144,7 @@
             class="btn btn-success btn-sm"
             (click)="generateTree()"
           >
-            Generate Choices made <i class="bi bi-signpost-split"></i>
+            Review your sweet choices <i class="bi bi-signpost-split"></i>
           </button>
         </div>
 
@@ -146,13 +152,16 @@
           class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mx-auto py-md-1 ms-5"
         >
           <small
-            >Highlighted red boxes shows the choices you've made in your story.
+            >Hover on the nodes to see the all the <i>possible</i> choices.
+            Highlighted red boxes shows the choices you've made.
           </small>
         </div>
       </div>
     }
   </div>
 </div>
+
+<!-- Decision tree view with path the user can follow and highlighted with user selection start. Add custom CSS to create the tree from list and unordered lists -->
 
 @if (pages && showTree) {
   <div class="row tree-row">
@@ -229,4 +238,5 @@
       </div>
     </div>
   </div>
+  <!-- Decision tree view with path the user can follow and highlighted with user selection end. -->
 }

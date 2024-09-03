@@ -9,8 +9,6 @@ import { FetchInitialQuestionnaire, pageSelector } from '../store';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'doughnut-manager';
-
   page$ = this.store.select(pageSelector);
 
   constructor(private store: Store<IQuestionResponse>) {}

@@ -3,7 +3,7 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { FeatureDecisionComponent } from './feature-decision.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IPage } from '../../../store/questionnaire-state.model';
-import { FetchInitialQuestionnaire } from '../../../store';
+import { FetchInitialQuestionnaire, SetAnswers } from '../../../store';
 
 describe('FeatureDecisionComponent', () => {
   let component: FeatureDecisionComponent;
@@ -114,9 +114,12 @@ describe('FeatureDecisionComponent', () => {
     expect(component.highlight).toEqual(false);
     expect(component.control).toEqual({});
     expect(dispatchSpy).toHaveBeenCalledWith(new FetchInitialQuestionnaire());
+    expect(dispatchSpy).toHaveBeenCalledWith(new SetAnswers([]));
   });
 
   it('should call generateTree for generating decision tree', () => {
+    const dispatchSpy = spyOn(mockStore, 'dispatch').and.callThrough();
+
     component.answerGroup = [
       {
         answerId: '1',
@@ -134,5 +137,8 @@ describe('FeatureDecisionComponent', () => {
     expect(component.showTree).toEqual(true);
     expect(component.highlight).toEqual(true);
     expect(component.control).toBeDefined();
+    expect(dispatchSpy).toHaveBeenCalledWith(
+      new SetAnswers(component.answerGroup),
+    );
   });
 });

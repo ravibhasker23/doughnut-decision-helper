@@ -15,7 +15,7 @@ export enum ActionTypes {
 }
 
 export class FetchInitialQuestionnaire implements IAction {
-  //Initial call for fetching the posts linked with a side effect fetchInitPosts$
+  //Initial call for fetching the questionnaire linked with a side effect fetchInitQuestionnaire$
   readonly type: ActionTypes = ActionTypes.FETCH_INIT_QUESTIONNAIRE;
 }
 
@@ -32,7 +32,7 @@ export class FetchInitialQuestionnaireError implements IAction {
 }
 
 export class SetAnswers implements IAction {
-  // Action for on error of fetching the API data
+  // Action for storing the user selection
   readonly type: ActionTypes = ActionTypes.SET_ANSWERS;
   constructor(public payload: IAnswers[]) {}
 }

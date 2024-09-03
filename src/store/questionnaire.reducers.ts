@@ -42,7 +42,6 @@ export function questionnaireReducer(
       };
     }
     case ActionTypes.SET_ANSWERS: {
-      console.log(action.payload);
       return {
         ...state,
         answers: action.payload,
