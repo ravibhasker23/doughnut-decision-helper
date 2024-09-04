@@ -3,7 +3,7 @@
 Angular application to fetch the initial questionnaire, store the user selection and generate a tree view representation of the selection.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
  
-- Shows the first question by-defualt and based on the selection suggests the next course of action.
+- Shows the first question by-defualt and based on the selection suggests the next course of action. Clone and checkout the main branch.
 - json-server and nodemon for creating a mock server.
 - @ngrx/store and @ngrx/effects for state management.
 - Bootstrap for grid layout and bootstrap-icons for displaying icons.
