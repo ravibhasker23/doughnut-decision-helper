@@ -60,7 +60,7 @@
                     autocomplete="off"
                     [disabled]="
                       answerGroup.length >= 2 ||
-                      (answerGroup[0] && answerGroup[0].answers === 'No')
+                      (answerGroup[0] && answerGroup[0].answers === 'Not today')
                     "
                     (click)="
                       updateAnswer(
